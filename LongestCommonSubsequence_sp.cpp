@@ -30,6 +30,31 @@ int calcLCS(int i,int j)
 
 
 }
+string ansString;
+void printLCS(int i,int j)
+{
+    if(A[i]=='\0' or B[j]=='\0')
+    {
+        cout<<ansString<<endl;
+        return;
+    }
+    if(A[i]==B[j])
+    {
+
+        ansString+=A[i];
+        printLCS(i+1,j+1);
+    }
+    else
+    {
+        if(dp[i+1][j]>dp[i][j+1])
+            printLCS(i+1,j);
+        else
+            printLCS(i,j+1);
+
+    }
+
+
+}
 
 int main()
 {
@@ -38,5 +63,5 @@ int main()
     lenA = strlen(A);
     lenB = strlen(B);
     cout<<calcLCS(0,0)<<endl;
-
+    printLCS(0,0);
 }
