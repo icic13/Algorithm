@@ -56,6 +56,37 @@ void printLCS(int i,int j)
 
 }
 
+string ans;
+void printAll(int i,int j)
+{
+
+    if(A[i]=='\0' or B[j]=='\0')
+    {
+        cout<<ans<<endl;
+        return;
+    }
+
+    if(A[i]==B[j])
+    {
+        ans+=A[i];
+        printAll(i+1,j+1);
+        ans.erase(ans.end()-1);
+    }
+    else
+    {
+        if(dp[i+1][j]>dp[i][j+1])
+            printAll(i+1,j);
+        else if(dp[i+1][j]<dp[i][j+1])
+            printAll(i,j+1);
+        else
+        {
+            printAll(i+1,j);
+            printAll(i,j+1);
+        }
+
+    }
+
+}
 int main()
 {
 
@@ -63,5 +94,8 @@ int main()
     lenA = strlen(A);
     lenB = strlen(B);
     cout<<calcLCS(0,0)<<endl;
+    cout<<"LCS :"<<endl;
     printLCS(0,0);
+    cout<<"All the lcs: "<<endl;
+    printAll(0,0);
 }
